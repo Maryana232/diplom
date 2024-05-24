@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <head>
+        <title>WebXR Application</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <script>
+        AFRAME.registerComponent("lat", {
+		init: function() {
+		this.el.addEventListener("loaded", e => {
+			this.el.setAttribute("look-at", "[camera]")
+		})
+		}
+	})
+    </script>
+    <body onload="init();">
+        <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+            <!-- Assets -->
+            <a-assets>
+				<a-asset-item id="Cube" src="./assets/Cube.gltf"></a-asset-item>
+				<a-asset-item id="Cube.001" src="./assets/Cube.001.gltf"></a-asset-item>
+				<a-asset-item id="Cube.002" src="./assets/Cube.002.gltf"></a-asset-item>
+				<a-asset-item id="Cube.003" src="./assets/Cube.003.gltf"></a-asset-item>
+				<a-asset-item id="Cube.004" src="./assets/Cube.004.gltf"></a-asset-item>
+				<a-asset-item id="Cube.005" src="./assets/Cube.005.gltf"></a-asset-item>
+				<a-asset-item id="plane" src="./assets/plane.gltf"></a-asset-item>
+				<a-asset-item id="plane.002" src="./assets/plane.002.gltf"></a-asset-item>
+				<a-asset-item id="cylinder" src="./assets/cylinder.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.001" src="./assets/cylinder.001.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.002" src="./assets/cylinder.002.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.004" src="./assets/cylinder.004.gltf"></a-asset-item>
+                
+            </a-assets>
+
+            <!-- Entities -->
+        
+			<a-entity id="all" position="0 -1 -8" rotation="0 -70 0">
+			    <a-entity id="#plane" gltf-model="#plane"  scale="1 1 1" position="0.0 -0.020693354308605194 -0.0" visible="true"></a-entity>
+			    <a-entity id="#plane.002" gltf-model="#plane.002"  scale="1 1 1" position="0.11359148472547531 0.3112298250198364 2.134632110595703" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder" gltf-model="#cylinder"  scale="1 1 1" position="5.836434113781763e-10 3.5554261207580566 2.42313814163208" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder.001" gltf-model="#cylinder.001"  scale="1 1 1" position="1.433866024017334 0.01653122715651989 -1.3824403285980225" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder.002" gltf-model="#cylinder.002"  scale="1 1 1" position="0.5301201343536377 3.5486090183258057 1.0611802339553833" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder.004" gltf-model="#cylinder.004"  scale="1 1 1" position="0.5292408466339111 0.01653122715651989 1.06351900100708" visible="true" shadow="cast: false" ></a-entity>
+
+                
+                <!-- text -->
+                <a-text id="#a" lat value="a" color="red" scale="3 3 3" position="3.3119378089904785 0.25 -3.037576675415039" visible="true"  ></a-text>
+			    <a-text id="#K" lat value="K" color="red" scale="3 3 3" position="0.4058036804199219 0.25 -2.01373553276062" visible="true"   ></a-text>
+			    <a-text id="#P" lat value="P" color="red" scale="3 3 3" position="2.445610523223877 0.25 -1.1946625709533691" visible="true"  ></a-text>
+			    <a-text id="#B" lat value="B" color="red" scale="3 3 3" position="1.0919743776321411 0.25 -0.4699886441230774" visible="true" ></a-text>
+			    <a-text id="#C" lat value="C" color="red" scale="3 3 3" position="-0.10828256607055664 0.25 2.5932652950286865" visible="true"></a-text>
+			    <a-text id="#A" lat value="A" color="red" scale="3 3 3" position="-0.01737608015537262 7.29274845123291 2.4455013275146484" visible="true"   ></a-text>
+                </a-entity>
+            
+            <!-- Sky -->
+            <a-sky color="#ECECEC"></a-sky>
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->

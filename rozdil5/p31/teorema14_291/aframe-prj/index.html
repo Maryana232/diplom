@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <head>
+        <title>WebXR Application</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script>
+            //універсальна функція зміни прозорості
+            function setOpacityOfGLTF(entity, opVal){
+                var model = entity.object3D;
+        
+              // Traverse the model's children to find materials and modify opacity
+              model.traverse(function (node) {
+                if (node.isMesh) {
+                  // Check if the node is a mesh with a material
+                  var material = node.material;
+                  if (material) {
+                    material.transparent = true; // Enable transparency
+                    material.opacity = opVal; // Set the desired opacity value
+                    material.needsUpdate = true; // Update the material
+                  }
+                }
+              });
+        
+                entity.setAttribute('material', {opacity: opVal});
+            }	
+            
+            
+              AFRAME.registerComponent("hideonclick", {
+                init: function() {
+                    this.hasClicked = false;
+                    this.el.addEventListener("click", function(e) {
+                        //e - подія натискання
+                        //e.target - AFrame об'єкт, на який натиснули
+                        //e.target.object3D - 3D об'єкт, властивості якого ми хочемо змінити
+                        if (!this.hasClicked){
+                            setOpacityOfGLTF(e.target, 0.2)
+                        }else{
+                            setOpacityOfGLTF(e.target, 1)
+                        }
+                        this.hasClicked=!this.hasClicked;
+                    });
+                  }
+              });
+              AFRAME.registerComponent("lat", {
+		init: function() {
+		this.el.addEventListener("loaded", e => {
+			this.el.setAttribute("look-at", "[camera]")
+		})
+		}
+	})
+            </script>	
+    </head>
+    <body onload="init();">
+        <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+            <!-- Assets -->
+            <a-assets>
+				<a-asset-item id="Cube" src="./assets/Cube.gltf"></a-asset-item>
+				<a-asset-item id="Cube.001" src="./assets/Cube.001.gltf"></a-asset-item>
+				<a-asset-item id="Cube.002" src="./assets/Cube.002.gltf"></a-asset-item>
+				<a-asset-item id="Cube.003" src="./assets/Cube.003.gltf"></a-asset-item>
+				<a-asset-item id="Cube.004" src="./assets/Cube.004.gltf"></a-asset-item>
+				<a-asset-item id="Cube.005" src="./assets/Cube.005.gltf"></a-asset-item>
+				<a-asset-item id="Sphere" src="./assets/Sphere.gltf"></a-asset-item>
+				<a-asset-item id="plane" src="./assets/plane.gltf"></a-asset-item>
+				<a-asset-item id="plane.001" src="./assets/plane.001.gltf"></a-asset-item>
+				<a-asset-item id="cylinder" src="./assets/cylinder.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.001" src="./assets/cylinder.001.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.002" src="./assets/cylinder.002.gltf"></a-asset-item>
+            </a-assets>
+
+        <!-- Entities -->
+        <a-entity id="all" position="0 1 -4">
+        <!-- Щоб працював тач -->
+		    <a-entity cursor="rayOrigin:mouse"></a-entity>
+		    <a-entity position="0 -1 -2">
+			
+			    <a-entity id="#Sphere" gltf-model="#Sphere"  scale="1 1 1" position="5.09254283187488e-09 0.0 -2.257072750921907e-09" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#plane"  gltf-model="#plane"  scale="1 1 1" position="0.0 -0.01684846170246601 -0.0" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#plane.001" hideonclick gltf-model="#plane.001"  scale="1 1 1" position="3.721838418038162e-16 1.710375428199768 0.01684846356511116" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder" gltf-model="#cylinder"  scale="1 1 1" position="7.264309154209059e-10 2.6259982585906982 -1.1175860237244706e-10" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder.001" gltf-model="#cylinder.001"  scale="1 1 1" position="1.5645705710900772e-16 -1.6682035948178964e-06 -1.1175860237244706e-10" visible="true" shadow="cast: false" ></a-entity>
+			    <a-entity id="#cylinder.002" gltf-model="#cylinder.002"  scale="1 1 1" position="-0.029395675286650658 -1.6688782125129364e-06 -0.009798706509172916" visible="true" shadow="cast: false" ></a-entity>
+
+          <!-- text -->
+          <a-text id="#p" lat value="p" color="red" scale="2 2 2" position="2.900360584259033 0.25 -2.841569662094116" visible="true"   ></a-text>
+			    <a-text id="#f" lat value="f" color="red" scale="2 2 2" position="2.900360584259033 3.1092886924743652 -0.29932451248168945" visible="true"  ></a-text>
+			    <a-text id="#b" lat value="b" color="red" scale="2 2 2" position="-0.23410427570343018 1.9744452238082886 -0.2993243634700775" visible="true"></a-text>
+			    <a-text id="#c" lat value="c" color="red" scale="2 2 2" position="-2.130812168121338 0.20899736881256104 -0.2993241250514984" visible="true" ></a-text>
+			    <a-text id="#a" lat value="a" color="red" scale="2 2 2" position="-1.6648389101028442 0.20899736881256104 -2.005704879760742" visible="true" ></a-text>
+			    <a-text id="#O" lat value="O" color="red" scale="2 2 2" position="0.20561689138412476 0.21556031703948975 -0.2993241250514984" visible="true"></a-text>     
+        
+        </a-entity>
+      </a-entity>  
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->

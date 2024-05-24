@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <head>
+        <title>WebXR Application</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script>
+            //універсальна функція зміни прозорості
+            function setOpacityOfGLTF(entity, opVal){
+                var model = entity.object3D;
+        
+              // Traverse the model's children to find materials and modify opacity
+              model.traverse(function (node) {
+                if (node.isMesh) {
+                  // Check if the node is a mesh with a material
+                  var material = node.material;
+                  if (material) {
+                    material.transparent = true; // Enable transparency
+                    material.opacity = opVal; // Set the desired opacity value
+                    material.needsUpdate = true; // Update the material
+                  }
+                }
+              });
+        
+                entity.setAttribute('material', {opacity: opVal});
+            }	
+            
+            
+              AFRAME.registerComponent("hideonclick", {
+                init: function() {
+                    this.hasClicked = false;
+                    this.el.addEventListener("click", function(e) {
+                        //e - подія натискання
+                        //e.target - AFrame об'єкт, на який натиснули
+                        //e.target.object3D - 3D об'єкт, властивості якого ми хочемо змінити
+                        if (!this.hasClicked){
+                            setOpacityOfGLTF(e.target, 0.2)
+                        }else{
+                            setOpacityOfGLTF(e.target, 1)
+                        }
+                        this.hasClicked=!this.hasClicked;
+                    });
+                  }
+              });
+            </script>	
+    </head>
+    <body onload="init();">
+        <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+          <!-- Assets -->
+          <a-assets>
+				<a-asset-item id="cube" src="./assets/cube.gltf"></a-asset-item>
+				<a-asset-item id="plane" src="./assets/plane.gltf"></a-asset-item>
+				<a-asset-item id="plane.001" src="./assets/plane.001.gltf"></a-asset-item>
+				<a-asset-item id="plane.002" src="./assets/plane.002.gltf"></a-asset-item>
+               
+          </a-assets>
+
+          <!-- Entities -->
+          <a-entity id="all" position="0 1.5 -7" rotation="0 -10 0">
+
+            <!-- Щоб працював тач -->
+		        <a-entity cursor="rayOrigin:mouse"></a-entity>
+		        <a-entity position="0 -1 -2">
+
+			        <a-entity id="#cube" hideonclick gltf-model="#cube"  scale="1 1 1" position="0.0 0.0 -0.0" visible="true" shadow="cast: false" ></a-entity>
+			        <a-entity id="#plane" hideonclick gltf-model="#plane"  scale="1 1 1" position="0.0 0.0 -0.0" visible="true" shadow="cast: false" ></a-entity>
+			        <a-entity id="#plane.001" hideonclick gltf-model="#plane.001"  scale="1 1 1" position="0.0 0.0 -0.0" visible="true" shadow="cast: false" ></a-entity>
+			        <a-entity id="#plane.002" hideonclick gltf-model="#plane.002"  scale="1 1 1" position="0.0 0.0 -0.0" visible="true" shadow="cast: false" ></a-entity>
+            
+            </a-entity>
+          </a-entity> 
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
+    <head>
+        <title>WebXR Application</title>
+        <link rel="icon" type="image/png" href="favicon.ico"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+	
+            
+        <script>
+          AFRAME.registerComponent("lat", {
+		init: function() {
+		this.el.addEventListener("loaded", e => {
+			this.el.setAttribute("look-at", "[camera]")
+		})
+		}
+	})
+        </script>    
+    </head>
+    <body onload="init();">
+        <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+            <!-- Assets -->
+            <a-assets>
+				<a-asset-item id="Cube" src="./assets/Cube.gltf"></a-asset-item>
+				<a-asset-item id="Cube.001" src="./assets/Cube.001.gltf"></a-asset-item>
+				<a-asset-item id="Cube.002" src="./assets/Cube.002.gltf"></a-asset-item>
+				<a-asset-item id="Cube.003" src="./assets/Cube.003.gltf"></a-asset-item>
+				<a-asset-item id="plane" src="./assets/plane.gltf"></a-asset-item>
+				<a-asset-item id="plane.001" src="./assets/plane.001.gltf"></a-asset-item>
+				<a-asset-item id="cylinder" src="./assets/cylinder.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.001" src="./assets/cylinder.001.gltf"></a-asset-item>
+				<a-asset-item id="cylinder.008" src="./assets/cylinder.008.gltf"></a-asset-item>
+                
+            </a-assets>
+
+            <!-- Entities -->
+            <a-entity id="all" position="0 -1 -8" rotation="0 90 15">
+			
+			<a-entity id="#plane"  gltf-model="#plane"  scale="1 1 1" position="0.0 -0.020693354308605194 -0.0" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#plane.001" gltf-model="#plane.001"  scale="1 1 1" position="0.0013692629290744662 0.3112298250198364 2.1443209648132324" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#cylinder" gltf-model="#cylinder"  scale="1 1 1" position="5.836434113781763e-10 3.5554261207580566 2.42313814163208" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#cylinder.001" gltf-model="#cylinder.001"  scale="1 1 1" position="4.524050746113062e-05 0.01653120294213295 0.7239835262298584" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#cylinder.008" gltf-model="#cylinder.008"  scale="1 1 1" position="-0.00047617408563382924 3.5445706844329834 0.9571031928062439" visible="true" shadow="cast: false" ></a-entity>
+
+            <!-- text -->
+            <a-text id="#a" lat value="a" color="red" scale="3 3 3" position="3.232170343399048 0.25 -3.254851818084717" visible="true"   ></a-text>
+			<a-text id="#B" lat value="B" color="red" scale="3 3 3" position="0.17011451721191406 0.25 -0.533024787902832" visible="true" ></a-text>
+			<a-text id="#C" lat value="C" color="red" scale="3 3 3" position="0.17011451721191406 0.25 2.585736036300659" visible="true"  ></a-text>
+			<a-text id="#A" lat value="A" color="red" scale="3 3 3" position="0.17011451721191406 7.297143459320068 2.422426462173462" visible="true"    ></a-text>
+        
+            </a-entity>
+        
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+<!-- MIT License: https://github.com/silverslade/aframe_blender_exporter/blob/master/LICENSE -->
